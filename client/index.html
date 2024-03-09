@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Export to Excel</title>
+  </head>
+  <body>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <h1>Press to Export</h1>
+      <button onclick="exportToExcel()">Export to Excel</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script>
+      function exportToExcel() {
+        fetch("http://localhost:3000/excel/aoa")
+          .then((response) => response.blob())
+          .then((blob) => {
+            saveAs(blob, "excel-export.xls");
+          })
+          .catch((error) => {
+            console.error("Error exporting to Excel:", error);
+          });
+      }
+    </script>
+  </body>
+</html>
